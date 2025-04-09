@@ -91,5 +91,23 @@ const registerUser = async (req, res) => {
     }
 }
 
+const adminLogin = async (req,res) => {
+    try {
+        
+        const { email, password } = req.body;
+        if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
+            const token = jwt.sign(email+password,process.env.JWT_SECRET); // Assuming this returns a JWT
+            return res.status(200).json({ success: true, token });
+        }
+        else{
+            return res.status(401).json({ success: false, message: "Invalid email or password" });
+        }
 
-export { loginUser, registerUser }
+    } catch (error) {
+        console.log("Error while logging in admin", error);
+        return res.status(500).json({ success: false, msg: "Internal server error: while logging in admin" });   
+    }
+}
+
+
+export { loginUser, registerUser, adminLogin }
