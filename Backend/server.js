@@ -7,6 +7,7 @@ connectDB()
 connectCloudinary();
 
 import userRouter from './routes/userRoute.js'
+import productRouter from './routes/productRoute.js';
 
 //App config
 const app = express()
@@ -15,6 +16,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 app.use('/user',userRouter);
+app.use('/product',productRouter);
 
 //api endpoints
 app.get('/',(req,res)=>{
