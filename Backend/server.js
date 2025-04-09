@@ -6,12 +6,15 @@ import connectCloudinary from './config/cloudinary.js';
 connectDB()
 connectCloudinary();
 
+import userRouter from './routes/userRoute.js'
+
 //App config
 const app = express()
 
 //middlewares
 app.use(express.json())
 app.use(cors())
+app.use('/user',userRouter);
 
 //api endpoints
 app.get('/',(req,res)=>{
